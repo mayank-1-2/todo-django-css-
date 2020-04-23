@@ -18,6 +18,7 @@ from django.urls import path
 from todo.views import index,addtodo,deltodo
 
 urlpatterns = [
+    path('',index),
     path('index/',index),
     path('addtodo/',addtodo),
     path('admin/', admin.site.urls),
