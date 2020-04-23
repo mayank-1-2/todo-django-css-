@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ul li {
+            list-style: none;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .zero {
+            overflow: auto;
+
+        }
+
+        .one {
+            height: 203px;
+            width: 82%;
+            color: blanchedalmond;
+            border: 4px solid black;
+            border-spacing: 12px;
+            display: block;
+            margin: 25px 119px;
+            padding: 12px 12px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size:x-large ;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .one:hover {
+            border-color: white;
+            background-image: url(https://cdn.pixabay.com/photo/2012/03/01/00/57/background-19861_960_720.jpg) ;
+            background-repeat: no-repeat;
+            color:black;
+            font-size: large;
+            
+        }
+
+        .two {
+            margin: 20px 257px;
+            width: 820px;
+            height: 327px;
+            margin-left: 240px;
+            border-radius: 5px;
+            color:blanchedalmond;
+        }
+
+        .two:hover {
+            /*background-image: url(https://cdn.pixabay.com/photo/2016/11/29/09/54/background-1868854_960_720.jpg);*/
+            font-size: x-large;
+            margin-left: 250px;
+        }
+
+        .two .text {
+            height: 51px;
+            width: 556px;
+            margin: 22px 98px;
+            border-radius: 5px;
+        }
+        .two .text:hover{
+            border: 3px groove rgb(45, 96, 206);
+        }
+        #add {
+            display: block;
+            color: rgb(45, 96, 206);
+            margin: 0px 230px;
+            background-color: white;
+            border-color: rgb(45, 96, 206);
+            ;
+            padding: 8px 132px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        #add:hover {
+            background-color: rgb(45, 96, 206);
+            color: white;
+            border-radius: 5px;
+        }
+
+        #del {
+            padding: 9px 15px;
+            position: relative;
+            right: 5px;
+            bottom: -5px;
+            border-radius: 5px;
+            color: white;
+            background-color: rgb(45, 96, 206);
+        }
+
+        #del:hover {
+            background-color: white;
+            color: rgb(45, 96, 206);
+            border: 2px solid rgb(45, 96, 206);
+        }
+
+        #title {
+            text-transform: uppercase;
+            margin: 9px -4px;
+            width: 96%;
+            height: 30%;
+        }
+
+        #content {
+            margin: 9px -4px;
+            width: 87%;
+            font-size: large;
+            height: 35%;
+        }
+    </style>
+</head>
+
+<body background="https://cdn.pixabay.com/photo/2016/07/05/16/53/leaf-1498985_960_720.jpg">
+    <div class="two">
+        <h1>Make Notes</h1>
+        <form action="/addtodo/" method="POST">
+            {% csrf_token %}
+            <input type="text" class="text" name="title" placeholder="Enter Your Title" />
+            <input type="text" class="text" name="content" placeholder="Enter your content" />
+            <input type="submit" id="add" name="add" />
+        </form>
+    </div>
+    <div class="zero">
+        <ul>
+            {% for i in todo_item %}
+            <li>
+                <div class="one">
+                    <div id="title"> {{i.title}} </div>
+                    <div id="content">{{i.content}} </div>
+
+                    <form action="/deltodo/{{i.id}}" method="POST">
+                        {% csrf_token %}
+                        <input id="del" type="submit" value="Delete" />
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>
